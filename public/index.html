@@ -3,6 +3,8 @@
 <head>
 <title>Little URL Creater</title>
 
+<script src = "script.js"></script>
+
 <style>
 body {
 background-color: LightBlue;
@@ -16,17 +18,16 @@ border-size: 2px;
 
 </style>
 </head>
-<body onload = "extractToken()">
 
-<center><h1>Little URL Creator</h1></center>
-
-<center>Input your URL here: 
-<br><br>
-<textarea id = "uRLToTest" row = "4" cols = "80"></textarea></center>
-<br><br>
-<center><button type  = "button" class = "buttonStyle" onclick = "shorten()">Shorten URL</button></center>
+<body onload="extractToken()">
+	<h1>Little URL Creator</h1>
+	<p> We shorten your urls with a click. Simple. </p>
+<textarea id="url" rows="4" cols="50"></textarea>
 <br>
 <br>
-<div id = "uRLOutput"></div>
-</body>
+    <button type = "button" class = "disBtn" onclick = "shorten()"> Shorten! </button>
+    <br>
+    <br>
+    <div id = "microURL"></div>
+  </body>
 </html>
