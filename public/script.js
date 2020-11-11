@@ -5,7 +5,6 @@ function shorten() {
 }
 
 function getLongURl(url){
-debugger;
 let result = document.getElementById("microURL");
 let encodedUrl = btoa(url);
 let uRl = "/tokenizer/" + encodedUrl;
