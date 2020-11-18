@@ -1,4 +1,5 @@
 function shorten() {
+  debugger;
   let url = document.getElementById("url").value;
 
     try {

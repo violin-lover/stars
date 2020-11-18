@@ -11,6 +11,9 @@ const app = express();
 const Database = require("@replit/database")
 const db = new Database()
 
+const tokencache = [];
+tokencache.push(createToken());
+
 app.use(bodyParser.json());
 // Express modules / packages
 
@@ -21,17 +24,22 @@ app.use(express.static('public'));
 // load the files that are in the public directory
 
 app.get("/favicon.ico", (req, res) => {
-res.redirect("hangouts.google.com/favicon.ico");
+res.redirect("https://www.youtube.com/favicon.ico");
 });
 
 app.get('/tokenizer/:longUrl', (req, res) => {
 /* This endpoint accepts a longUrl, creates a unique token corrosponding to the long url. Stores the mapping  between the two. Returns the token for constructinng the short url. */
   let longUrl = req.params.longUrl;
-  let token = createToken();
-  let sUrl = req.protocol + "://" + req.hostname + "/" + token;
-  console.log(longUrl);
-  db.set(token, longUrl);
-  res.json({"shortenUrl":sUrl})
+  db.get(longUrl).then(tok => {if(tok != null){
+    let sUrl = req.protocol + "://" + req.hostname + "/" + tok;
+    res.json({"shortenUrl":sUrl})
+  } else {
+    let token = tokencache.pop();
+    createToken();
+      let sUrl = req.protocol + "://" + req.hostname + "/" + token;
+      db.set(token,longUrl);
+      res.json({"shortenUrl":sUrl})
+  }})
 })
 
 app.get('/:token', (req, res) => {
@@ -45,8 +53,7 @@ app.get('/:token', (req, res) => {
   } else {let dUrl = decodeURIComponent(longer); dUrl = Buffer.from(dUrl, "base64"); dUrl  = dUrl.toString("utf8");res.redirect(dUrl)}});
 });
 
-app.listen(3000, () => console.log('server started' + new Date()));
-
+app.listen(3000, () => console.log('server started ' + new Date()));
 
 
 function createToken() {
@@ -55,5 +62,9 @@ function createToken() {
     for (let i = 0; i < 6; i++) {
         token += charMap[Math.floor(Math.random() * 62)];
     }
-    return token;
+    db.get(token).then(lUrl => {if(lUrl != null){
+      createToken();
+    } else {
+      tokencache.push(token);
+    }})
 };
