@@ -10,7 +10,7 @@ function is_url(url, result) {
     new URL(url);
     getLongURl();
   } catch (error) {
-    result.innerHTML = "Please make sure your url is valid.";
+    result.innerHTML = "~Please make sure your URL is valid~";
   }
 }
 
