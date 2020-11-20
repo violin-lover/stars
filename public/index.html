@@ -1,31 +1,32 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title>Little URL Creater</title>
+  <head>
+    <title>Little URL Creater</title>
 
-<script src = "script.js"></script>
+    <script src="script.js"></script>
 
-<style>
-body {
-background-color: LightBlue;
-}
+    <style>
+      body {
+        background-color: LightBlue;
+      }
 
-.buttonStyle {
-color: Black;
-font-family: cursive;
-border-size: 2px;
-}
+      .buttonStyle {
+        color: Black;
+        font-family: cursive;
+        border-size: 2px;
+      }
+          
+    </style>
+  </head>
 
-</style>
-</head>
-
-<center><h1>Little URL Creator</h1></center>
-	<center><p>Input your URL here:</p></center>
-<center><textarea id="url" rows="4" cols="45"></textarea></center>
-<br>
-    <center><button type = "button" class = "disBtn" onclick = "shorten()"> Shorten! </button></center>
-    <br>
-    <br>
-    <center><div id = "microURL"></div></center>
+  <body>
+    <center><h1>Little URL Creator</h1></center>
+    <center><p>Input your URL here:</p></center>
+    <center><textarea id="url" rows="5" cols="60"></textarea></center>
+      <br>
+    <center><button type="button" class="disBtn" onclick="shorten()">Shorten!</button></center>
+      <br>
+      <br>
+    <center><div id="microURL"></div></center>
   </body>
 </html>
